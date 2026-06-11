@@ -61,27 +61,40 @@ export function InfoDefault({ section }: InfoDefaultProps) {
         {/* Divider */}
         <div className={`h-px w-full max-w-[1800px] ${DIVIDER}`} />
 
-        {/* Partner-logo ticker — duplicated list translated by one set for a
-            seamless loop; edges fade via a mask. Pauses for reduced motion. */}
-        {logos.length > 0 && (
-          <div className="w-full max-w-[1800px] overflow-hidden [mask-image:linear-gradient(to_right,transparent,#000_6%,#000_94%,transparent)]">
-            <ul className="flex w-max items-center motion-reduce:animate-none animate-[marquee_32s_linear_infinite]">
-              {[...logos, ...logos].map((logo, i) =>
-                logo.url ? (
+        {/* Partner-logo ticker — the visible logos are repeated until a single
+            loop "half" overflows the row (so even one logo fills the width and
+            never clusters at the left), then that half is duplicated so the
+            -50% shift loops seamlessly. Edges fade via a mask; pauses for
+            reduced motion. */}
+        {(() => {
+          const ticker = logos.filter((logo) => logo.url);
+          if (ticker.length === 0) return null;
+          // ~14 logos comfortably span the 1800px row at h-7; repeat up to that
+          // so few-logo (incl. single-logo) tickers still fill and scroll.
+          const reps = Math.max(1, Math.ceil(14 / ticker.length));
+          const half = Array.from(
+            { length: reps * ticker.length },
+            (_, i) => ticker[i % ticker.length]
+          );
+          const track = [...half, ...half];
+          return (
+            <div className="w-full max-w-[1800px] overflow-hidden [mask-image:linear-gradient(to_right,transparent,#000_6%,#000_94%,transparent)]">
+              <ul className="flex w-max items-center motion-reduce:animate-none animate-[marquee_32s_linear_infinite]">
+                {track.map((logo, i) => (
                   <li key={i} className="mr-[60px] shrink-0">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={logo.url}
+                      src={logo.url!}
                       alt=""
                       aria-hidden="true"
                       className="h-7 w-auto opacity-40"
                     />
                   </li>
-                ) : null
-              )}
-            </ul>
-          </div>
-        )}
+                ))}
+              </ul>
+            </div>
+          );
+        })()}
       </div>
     </section>
   );
