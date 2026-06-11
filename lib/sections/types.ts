@@ -59,4 +59,21 @@ export type InfoSection = BaseSection & {
   logos: ImageAsset[];
 };
 
-export type Section = UnknownSection | HeroSection | InfoSection;
+export type ServiceItem = {
+  id: string;
+  title: string | null;
+  description: string | null;
+};
+
+export type AccordionSection = BaseSection & {
+  type: "accordion";
+  frontEndComponent: string | null;
+  heading: string | null;
+  services: ServiceItem[];
+};
+
+export type Section =
+  | UnknownSection
+  | HeroSection
+  | InfoSection
+  | AccordionSection;

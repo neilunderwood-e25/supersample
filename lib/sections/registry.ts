@@ -1,6 +1,7 @@
 import type { SectionDefinition } from "./config";
 import { heroDefinition } from "./definitions/hero";
 import { infoDefinition } from "./definitions/info";
+import { accordionDefinition } from "./definitions/accordion";
 
 /**
  * Central section registry.
@@ -16,4 +17,5 @@ import { infoDefinition } from "./definitions/info";
 export const sectionRegistry: SectionDefinition[] = [
   heroDefinition,
   infoDefinition,
+  accordionDefinition,
 ];

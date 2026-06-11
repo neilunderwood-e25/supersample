@@ -20,8 +20,13 @@ export function InfoDefault({ section }: InfoDefaultProps) {
         <div className="flex w-full max-w-[1800px] items-start justify-between gap-10 max-md:flex-col max-md:gap-8">
           {eyebrow && (
             <div className="inline-flex shrink-0 items-center gap-2 rounded-[20px] border border-[color-mix(in_srgb,var(--text-default)_8%,transparent)] bg-[color-mix(in_srgb,var(--text-default)_2%,transparent)] py-2 pl-4 pr-[18px]">
-              <span className="flex items-center justify-center rounded-[10px] bg-[color-mix(in_srgb,var(--brand-primary)_20%,transparent)] p-1">
-                <span className="size-2 rounded-[4px] bg-[var(--brand-primary)]" />
+              <span className="relative flex items-center justify-center rounded-[10px] bg-[color-mix(in_srgb,var(--brand-primary)_20%,transparent)] p-1">
+                {/* Radiating beacon ring — pulses outward like a map location pin. */}
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 rounded-[10px] bg-[color-mix(in_srgb,var(--brand-primary)_35%,transparent)] opacity-0 motion-safe:animate-[beacon_2s_ease-out_infinite]"
+                />
+                <span className="relative size-2 rounded-[4px] bg-[var(--brand-primary)]" />
               </span>
               <span className="text-[14px] font-medium uppercase leading-none tracking-[0.02em] text-[var(--text-default)]">
                 {eyebrow}
