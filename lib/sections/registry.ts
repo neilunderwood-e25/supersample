@@ -1,7 +1,8 @@
 import type { SectionDefinition } from "./config";
+import { heroDefinition } from "./definitions/hero";
 
 /**
- * Central section registry. Empty by default.
+ * Central section registry.
  *
  * To add a section, create:
  *   - components/sections/YourSection/index.tsx
@@ -11,4 +12,4 @@ import type { SectionDefinition } from "./config";
  * See `components/ARCHITECTURE.md` for the full walkthrough and the
  * switch-case mental model used inside variant routers.
  */
-export const sectionRegistry: SectionDefinition[] = [];
+export const sectionRegistry: SectionDefinition[] = [heroDefinition];

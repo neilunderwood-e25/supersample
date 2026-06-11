@@ -1,18 +1,21 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Roboto } from "next/font/google";
+import { Inter } from "next/font/google";
+import "lenis/dist/lenis.css";
 import "./globals.css";
+import { Header } from "@/components/layout/Header";
+import { SmoothScroll } from "@/components/common/SmoothScroll";
 
-const roboto = Roboto({
-  variable: "--font-roboto",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Contentful Next.js Starter",
-  description: "Next.js + Contentful starter project",
+  title: "Opus — Studio",
+  description: "Opus studio template, rebuilt on Next.js + Contentful.",
 };
 
 export default function RootLayout({
@@ -21,8 +24,13 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${roboto.variable} h-full antialiased`}>
-      <body className="min-h-full">{children}</body>
+    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+      <body className="min-h-full">
+        <SmoothScroll>
+          <Header />
+          {children}
+        </SmoothScroll>
+      </body>
     </html>
   );
 }

@@ -56,3 +56,31 @@ export function splitLocaleFromSlug(
   }
   return { locale: DEFAULT_LOCALE, rest: slug };
 }
+
+/** Resolve the locale a pathname maps to (the URL form of splitLocaleFromSlug). */
+export function getLocaleFromPathname(pathname: string): LocaleConfig {
+  const first = pathname.split("/").filter(Boolean)[0]?.toLowerCase();
+  return LOCALE_MAP.find((l) => l.urlSlug === first) ?? DEFAULT_LOCALE;
+}
+
+/**
+ * Prefix an internal href with the active locale so clicking a link keeps the
+ * chosen language. The default locale stays unprefixed. External/protocol and
+ * fragment-only (`#…`) links pass through unchanged, as do paths already
+ * carrying a locale prefix. Hash/query suffixes are preserved.
+ *   localizeHref("/blog", es)     → "/es/blog"
+ *   localizeHref("/#services", es) → "/es#services"
+ *   localizeHref("#about", es)    → "#about"        (same-page anchor)
+ *   localizeHref("/careers", en)  → "/careers"      (default locale)
+ */
+export function localizeHref(href: string, locale: LocaleConfig): string {
+  if (!href) return href;
+  if (/^(https?:|mailto:|tel:|\/\/|#)/i.test(href)) return href;
+  if (locale.urlSlug === DEFAULT_LOCALE.urlSlug || !href.startsWith("/")) return href;
+  const firstSegment = href.split("/")[1]?.toLowerCase();
+  if (LOCALE_MAP.some((l) => l.urlSlug === firstSegment)) return href; // already prefixed
+  const cut = href.search(/[#?]/);
+  const path = cut === -1 ? href : href.slice(0, cut);
+  const suffix = cut === -1 ? "" : href.slice(cut);
+  return `/${locale.urlSlug}${path === "/" ? "" : path}${suffix}`;
+}

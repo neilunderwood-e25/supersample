@@ -6,23 +6,32 @@
  */
 :root {
   --background: #ffffff;
-  --foreground: #141414;
+  --foreground: #000000;
 
-  --brand-primary: #0066cc;
-  --brand-primary-hover: #004c99;
-  --text-default: #141414;
-  --text-muted: #6a6a6a;
+  --brand-primary: #0048f9;
+  --brand-primary-hover: #0038c8;
+  --text-default: #000000;
+  --text-muted: rgba(0, 0, 0, 0.6);
   --bg-muted: #f5f5f5;
+
+  /* Full-screen navigation overlay */
+  --menu-overlay: #0048f9;
+  --menu-foreground: #ffffff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-roboto);
+  --font-sans: var(--font-inter);
+}
+
+/* Single design breakpoint: desktop layout at >=720px, mobile below. */
+@theme {
+  --breakpoint-md: 720px;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-roboto), Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), "Inter", Arial, Helvetica, sans-serif;
 }

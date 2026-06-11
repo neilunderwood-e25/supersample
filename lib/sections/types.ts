@@ -30,4 +30,15 @@ export type UnknownSection = BaseSection & {
   raw: unknown;
 };
 
-export type Section = UnknownSection;
+export type HeroSection = BaseSection & {
+  type: "hero";
+  frontEndComponent: string | null;
+  headingLineOne: string | null;
+  headingLineTwo: string | null;
+  subheading: string | null;
+  image: ImageAsset | null;
+  ctaLabel: string | null;
+  ctaHref: string | null;
+};
+
+export type Section = UnknownSection | HeroSection;
