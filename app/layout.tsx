@@ -5,6 +5,15 @@ import "lenis/dist/lenis.css";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { SmoothScroll } from "@/components/common/SmoothScroll";
+import { JsonLd } from "@/components/common/JsonLd";
+import {
+  organizationJsonLd,
+  webSiteJsonLd,
+  SITE_NAME,
+  SITE_TAGLINE,
+  SITE_DESCRIPTION,
+  SITE_URL,
+} from "@/lib/seo";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -14,8 +23,25 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Opus — Studio",
-  description: "Opus studio template, rebuilt on Next.js + Contentful.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_TAGLINE,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    url: SITE_URL,
+    title: SITE_TAGLINE,
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TAGLINE,
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({
@@ -26,6 +52,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full">
+        <JsonLd data={organizationJsonLd()} />
+        <JsonLd data={webSiteJsonLd()} />
         <SmoothScroll>
           <Header />
           {children}

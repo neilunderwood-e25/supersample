@@ -41,4 +41,22 @@ export type HeroSection = BaseSection & {
   ctaHref: string | null;
 };
 
-export type Section = UnknownSection | HeroSection;
+export type StatItem = {
+  id: string;
+  prefix: string | null;
+  value: number | null;
+  suffix: string | null;
+  label: string | null;
+};
+
+export type InfoSection = BaseSection & {
+  type: "info";
+  frontEndComponent: string | null;
+  eyebrow: string | null;
+  heading: string | null;
+  subheading: string | null;
+  stats: StatItem[];
+  logos: ImageAsset[];
+};
+
+export type Section = UnknownSection | HeroSection | InfoSection;

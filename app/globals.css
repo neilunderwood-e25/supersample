@@ -35,3 +35,14 @@ body {
   color: var(--foreground);
   font-family: var(--font-inter), "Inter", Arial, Helvetica, sans-serif;
 }
+
+/* Logo ticker — the list is rendered twice, so shifting by one set (-50%)
+   loops seamlessly. Used via `animate-[marquee_32s_linear_infinite]`. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

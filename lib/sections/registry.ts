@@ -1,5 +1,6 @@
 import type { SectionDefinition } from "./config";
 import { heroDefinition } from "./definitions/hero";
+import { infoDefinition } from "./definitions/info";
 
 /**
  * Central section registry.
@@ -12,4 +13,7 @@ import { heroDefinition } from "./definitions/hero";
  * See `components/ARCHITECTURE.md` for the full walkthrough and the
  * switch-case mental model used inside variant routers.
  */
-export const sectionRegistry: SectionDefinition[] = [heroDefinition];
+export const sectionRegistry: SectionDefinition[] = [
+  heroDefinition,
+  infoDefinition,
+];

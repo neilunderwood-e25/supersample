@@ -76,13 +76,25 @@ export function Header() {
   return (
     <>
       {/* Top bar — sits above the overlay so the logo + toggle stay visible. */}
+      {/* Glass background bar — sits BELOW the overlay (z-55 < z-60), so the
+          blue slides over the glass on open/close; the logo + Menu bar (z-70)
+          stays above the blue. */}
+      <div
+        aria-hidden
+        className="fixed inset-x-0 top-0 z-[55] h-[78px] bg-[color-mix(in_srgb,var(--background)_65%,transparent)] backdrop-blur-md max-md:h-[72px]"
+        style={{
+          transform: hidden ? "translateY(-100%)" : "translateY(0)",
+          transition: "transform 0.4s cubic-bezier(0.34, 0, 0, 1)",
+        }}
+      />
       <header
-        className="fixed inset-x-0 top-0 z-[70] mx-auto flex max-w-[1920px] items-center justify-between px-[60px] py-5 max-md:px-5 max-md:py-4"
+        className="fixed inset-x-0 top-0 z-[70]"
         style={{
           transform: hidden ? "translateY(-100%)" : "translateY(0)",
           transition: "transform 0.4s cubic-bezier(0.34, 0, 0, 1)",
         }}
       >
+        <div className="mx-auto flex max-w-[1920px] items-center justify-between px-[60px] py-5 max-md:px-5 max-md:py-4">
         <Link
           href="/"
           onClick={() => setOpen(false)}
@@ -124,6 +136,7 @@ export function Header() {
         >
           Menu
         </button>
+        </div>
       </header>
 
       {/* Full-screen navigation overlay. Reveals from the top down via an
@@ -147,7 +160,12 @@ export function Header() {
                 onClick={() => setOpen(false)}
                 className="relative block w-fit cursor-pointer font-medium leading-[1.08] tracking-[-0.03em] text-[clamp(34px,3.6vw,64px)] after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-0 after:bg-current after:content-[''] after:transition-[width] after:duration-300 after:ease-[cubic-bezier(0.34,0,0,1)] hover:after:w-full max-md:text-[clamp(26px,5.4dvh,48px)]"
                 style={{
-                  clipPath: open ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
+                  // Negative top/bottom insets expand the clip past the box so
+                  // glyph ascenders/descenders (e.g. the "g" in Blog) aren't
+                  // clipped; only the right inset animates (the L→R wipe).
+                  clipPath: open
+                    ? "inset(-0.3em 0 -0.3em 0)"
+                    : "inset(-0.3em 100% -0.3em 0)",
                   transition: `clip-path 0.55s ${EASE}`,
                   transitionDelay: open ? `${0.2 + i * 0.06}s` : "0s",
                 }}
