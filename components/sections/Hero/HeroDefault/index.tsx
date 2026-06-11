@@ -5,7 +5,7 @@ import { ParallaxImage } from "./ParallaxImage";
 type HeroDefaultProps = { section: HeroSection };
 
 const HEADING =
-  "font-semibold uppercase leading-[1.05] tracking-[-0.06em] text-[var(--text-default)] whitespace-nowrap text-[clamp(38px,11.6vw,222px)] max-md:text-[12.5vw] max-md:leading-[0.9]";
+  "font-semibold uppercase leading-[1.05] tracking-[-0.06em] text-[var(--text-default)] whitespace-nowrap text-[clamp(38px,11.6vw,222px)] max-md:text-[20.5vw] max-md:leading-[0.9]";
 
 /**
  * "Hero / Default" — oversized split display heading.
@@ -26,13 +26,13 @@ export function HeroDefault({ section }: HeroDefaultProps) {
     <section className="relative w-full bg-[var(--background)] max-md:min-h-[100dvh]">
       <div className="mx-auto flex w-full max-w-[1920px] flex-col items-center gap-[clamp(32px,3.1vw,60px)] px-[60px] pb-[100px] pt-[clamp(112px,15.6vw,300px)] max-md:min-h-[100dvh] max-md:justify-end max-md:gap-5 max-md:px-5 max-md:pb-12 max-md:pt-[104px]">
         {/* Heading */}
-        <div className="flex w-full max-w-[1800px] flex-col items-end gap-[20px] max-md:items-stretch max-md:gap-0">
+        <div className="flex w-full max-w-[1800px] flex-col items-end gap-[20px] max-md:items-stretch max-md:gap-1">
           {headingLineOne && (
             <Reveal
               as="h1"
               delay={0}
               y={64}
-              className={`w-full text-right max-md:text-left ${HEADING}`}
+              className={`w-full text-right max-md:whitespace-normal max-md:text-right ${HEADING}`}
             >
               {headingLineOne}
             </Reveal>

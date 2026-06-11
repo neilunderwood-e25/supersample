@@ -87,7 +87,7 @@ export function Header() {
           href="/"
           onClick={() => setOpen(false)}
           aria-label="Super Sample, home"
-          className="inline-flex items-center"
+          className="inline-flex cursor-pointer items-center"
         >
           {/* Mobile: compact square mark (dark, reads on white + the blue overlay) */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -115,7 +115,7 @@ export function Header() {
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="rounded-full px-5 py-2.5 text-[20px] font-medium leading-none tracking-[-0.02em] transition-colors duration-300 max-md:px-4 max-md:py-2 max-md:text-[18px]"
+          className="cursor-pointer rounded-full px-5 py-2.5 text-[18px] font-medium leading-none tracking-[-0.02em] transition-colors duration-300 max-md:px-4 max-md:py-2 max-md:text-[16px]"
           style={{
             backgroundColor: open ? "#ffffff" : "var(--brand-primary)",
             color: open ? "var(--brand-primary)" : "#ffffff",
@@ -137,15 +137,15 @@ export function Header() {
           pointerEvents: open ? "auto" : "none",
         }}
       >
-        <div className="mx-auto flex h-full w-full max-w-[1920px] justify-between px-[60px] pb-[60px] pt-[150px] max-md:flex-col max-md:gap-12 max-md:overflow-y-auto max-md:px-5 max-md:pb-10 max-md:pt-[108px]">
+        <div className="mx-auto flex h-full w-full max-w-[1920px] justify-between px-[60px] pb-[60px] pt-[150px] max-md:flex-col max-md:justify-start max-md:gap-[clamp(20px,4dvh,48px)] max-md:overflow-y-auto max-md:px-5 max-md:pb-[5dvh] max-md:pt-[12dvh]">
           {/* Primary nav — large, wipes in left-to-right, staggered. */}
-          <nav className="flex flex-col">
+          <nav className="flex flex-col gap-[clamp(10px,1.2vw,22px)] max-md:gap-[1.2dvh]">
             {NAV_LINKS.map((link, i) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="block w-fit overflow-hidden font-medium leading-[1.08] tracking-[-0.03em] text-[clamp(44px,5vw,96px)] max-md:text-[15vw]"
+                className="relative block w-fit cursor-pointer font-medium leading-[1.08] tracking-[-0.03em] text-[clamp(34px,3.6vw,64px)] after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-0 after:bg-current after:content-[''] after:transition-[width] after:duration-300 after:ease-[cubic-bezier(0.34,0,0,1)] hover:after:w-full max-md:text-[clamp(26px,5.4dvh,48px)]"
                 style={{
                   clipPath: open ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
                   transition: `clip-path 0.55s ${EASE}`,
@@ -159,7 +159,7 @@ export function Header() {
 
           {/* Secondary columns — fade + rise in after the primary nav. On
               mobile they drop below the nav (social in a 2-column grid). */}
-          <div className="flex flex-col gap-12 pt-2 text-left max-md:gap-8 max-md:pt-0">
+          <div className="flex flex-col gap-12 pt-2 text-left max-md:gap-[clamp(16px,3dvh,32px)] max-md:pt-0">
             <MenuColumn
               label="Follow us"
               links={SOCIAL_LINKS}
@@ -223,7 +223,7 @@ function MenuColumn({
             <Link
               href={link.href}
               {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
-              className="text-[32px] font-medium leading-[1.25] tracking-[-0.02em] text-[var(--menu-foreground)] transition-opacity hover:opacity-70 max-md:text-[22px]"
+              className="relative inline-block cursor-pointer text-[24px] font-medium leading-[1.25] tracking-[-0.02em] text-[var(--menu-foreground)] after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-current after:content-[''] after:transition-[width] after:duration-300 after:ease-[cubic-bezier(0.34,0,0,1)] hover:after:w-full max-md:text-[clamp(14px,2.2dvh,20px)]"
               style={{
                 opacity: open ? 1 : 0,
                 transform: open ? "translateY(0)" : "translateY(12px)",
